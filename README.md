@@ -1,7 +1,7 @@
-#EKON 29 Downloads
+# EKON 29 Downloads
 
-##Effective Unit Testing
+## Effective Unit Testing
 Code samples from presentation on unit tests.
 
-##Firmware
+## Firmware
 Code samples from presentation on firmware basics.
