@@ -1,0 +1,68 @@
+unit TestEcef;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, DUnitX.TestFramework, DUnitX.Attributes,
+  DUnitX.TestDataProvider, Attributes.Range, DataProvider.EcefToLla,
+  Coordinates, Coordinates.Helpers;
+
+type
+  [TestFixture]
+  TTestEcef = class
+  public
+    [Setup]
+    procedure Setup;
+    [TearDown]
+    procedure TearDown;
+    // Sample Methods
+    // Simple single Test
+    //[Test]
+    //[TestCaseRange('RangeTest', '100.0:200.0:10.0, 100.0:200.0:10.0, 100.0:200.0:10.0')]
+    //procedure TestRange(ATestData: TEcefTestData);
+    // Test with TestCase Attribute to supply parameters.
+    [Test]
+    [TestCaseProvider(TEcefToLlaDataProvider)]
+    procedure ToLla(AEcef: TEcefCoordinates; AExpected: TGeodeticCoordinates; ATolerance: Double; AObjectID: String);
+    [Test]
+    [TestCaseProvider('EcefToLLa')]
+    procedure ToEcef(ALla: TGeodeticCoordinates; AExpected: TEcefCoordinates; ATolerance: Double; AObjectID: String);
+  end;
+
+implementation
+
+procedure TTestEcef.Setup;
+begin
+end;
+
+procedure TTestEcef.TearDown;
+begin
+end;
+
+//procedure TTestEcef.TestRange(ATestData: TEcefTestData);
+//begin
+//  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('X: %.3f, Y: %.3f, Z: %.3f', [ATestData.XMeters, ATestData.YMeters, ATestData.ZMeters]));
+//end;
+
+procedure TTestEcef.ToLla(AEcef: TEcefCoordinates; AExpected: TGeodeticCoordinates; ATolerance: Double; AObjectID: String);
+begin
+  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('Using Data Provider %s', [AObjectID]));
+  var LActual := AEcef.ToGeodeticCoordinates;
+  Assert.AreEqual(AExpected.LatitudeDegrees, LActual.LatitudeDegrees, ATolerance, 'Latitude incorrect');
+  Assert.AreEqual(AExpected.LongitudeDegrees, LActual.LongitudeDegrees, ATolerance, 'Longitude incorrect');
+  Assert.AreEqual(AExpected.AltitudeMeters, LActual.AltitudeMeters, ATolerance, 'Altitude incorrect');
+end;
+
+procedure TTestEcef.ToEcef(ALla: TGeodeticCoordinates; AExpected: TEcefCoordinates; ATolerance: Double; AObjectID: String);
+begin
+  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('Using Data Provider %s', [AObjectID]));
+  var LActual := ALla.ToEcefCoordinates;
+  Assert.AreEqual(AExpected.XMeters, LActual.XMeters, ATolerance, 'Latitude incorrect');
+  Assert.AreEqual(AExpected.YMeters, LActual.YMeters, ATolerance, 'Longitude incorrect');
+  Assert.AreEqual(AExpected.ZMeters, LActual.ZMeters, ATolerance, 'Altitude incorrect');
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TTestEcef);
+  TestDataProviderManager.RegisterProvider('EcefToLLa', TEcefToLlaDataProvider);
+end.

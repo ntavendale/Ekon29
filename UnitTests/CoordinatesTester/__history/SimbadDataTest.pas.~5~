@@ -1,0 +1,30 @@
+unit SimbadDataTest;
+
+interface
+
+uses
+  DUnitX.TestFramework, Coordinates, Parser.Simbad;
+
+const
+  SIMBAD_OUTPUT = 'C.D.S.  -  SIMBAD4 rel 1.8  -  2025.10.07CEST02:14:41'#10#10'Vega'#10'----'#10#10'Object * alf Lyr  ---  dS*  ---  OID=@2900336   (@@133322,0)  ---  coobox=19821'#10#10'Coordinates(ICRS,ep=J2000,eq=2000): 18 36 56.33635  +38 47 01.2802 (Opt ) A [3.51 2.81 90] 2007A&A...474..653V'#10'Coordinates(FK4,ep=B1950,eq=1950): 18 35 14.66709  +38 44 09.8043'#10'Coordinates(Gal,ep=J2000,eq=2000): 067.44820813  +19.23725227 '#10'hierarchy counts: #parents=1, #children=0, #siblings=0'#10'Proper motions: 200.94 286.23 [0.32 0.40 0] A 2007A&A...474..653V'#10'Parallax: 130.23 [0.36] A 2007A&A...474..653V'#10'Radial Velocity: -13.5 [0.4] C 2004A&A...420..183A'#10'Redshift: -0.000045 [0.000001] C 2004A&A...420..183A'#10'cz: -13.50 [0.40] C 2004A&A...420..183A'#10'Flux U : 0.03 [~] C 2002yCat.2237....0D'#10'Flux B : 0.03 [~] C 2002yCat.2237....0D'#10'Flux V : 0.03 [~] C 2002yCat.2237....0D'#10'Flux R : 0.07 [~] C 2002yCat.2237....0D'#10'Flux I : 0.10 [~] C 2002yCat.2237....0D'#10'Flux J : -0.177 [0.206] D 2003yCat.2246....0C'#10'Flux H : -0.029 [0.146] D 2003yCat.2246....0C'#10'Flux K : 0.129 [0.186] D 2003yCat....';
+
+type
+  [TestFixture]
+  TSimbadDataTest = class
+  public
+    [Test]
+    procedure ParserTest;
+  end;
+
+implementation
+
+procedure TSimbadDataTest.ParserTest;
+begin
+  var LActual := TSimbadData.Parse(SIMBAD_OUTPUT);
+  Assert.AreEqual(LActual.CelestiaCoordinates.RightAscenstion, 0.0);
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TSimbadDataTest);
+
+end.

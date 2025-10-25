@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/04/20 16:59:37.000.574,=C:\Users\ntavendale\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/09/21 13:50:32.000.083,=C:\Users\ntavendale\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/09/21 13:51:54.000.828,C:\Users\ntavendale\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Development\UnitTests-Ekon29\CoordinatesTester\TestEcef.pas</Transaction>
+    <Transaction>2025/09/21 13:52:03.000.196,C:\Users\ntavendale\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Development\UnitTests-Ekon29\CoordinatesTester\CoordinatesTester.dproj</Transaction>
+    <Transaction>2025/09/21 13:52:23.000.159,=C:\Development\UnitTests-Ekon29\Coordinates\Coordinates.pas</Transaction>
+    <Transaction>2025/09/21 13:52:23.000.122,=C:\Development\UnitTests-Ekon29\Coordinates\Coordinates.Helpers.pas</Transaction>
+    <Transaction>2025/09/21 13:55:36.000.439,=C:\Development\UnitTests-Ekon29\UnitTesting\Attributes\Attributes.Range.pas</Transaction>
+    <Transaction>2025/09/21 20:09:19.000.561,=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/09/21 20:10:11.000.303,C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas=C:\Development\UnitTests-Ekon29\UnitTesting\DataProviders\DataProvider.EcefToLla.pas</Transaction>
+    <Transaction>2025/10/07 20:47:39.000.065,=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/10/07 20:47:45.000.949,C:\Development\UnitTests-Ekon29\CoordinatesTester\TestRightAscensionDeclenation.pas=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/10/07 20:51:22.000.799,=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/10/07 20:51:40.000.107,C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas=C:\Development\UnitTests-Ekon29\Parser\Parser.Simbad.pas</Transaction>
+    <Transaction>2025/10/07 20:59:20.000.697,=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/10/07 20:59:37.000.891,C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas=C:\Development\UnitTests-Ekon29\CoordinatesTester\SimbadDataTest.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="..\..\UnitTests"/>
+    <File Path="..\Coordinates"/>
+    <File Path="..\Coordinates\Coordinates.Helpers.pas"/>
+    <File Path="..\Coordinates\Coordinates.pas"/>
+    <File Path="..\UnitTesting"/>
+    <File Path="..\UnitTesting\Attributes"/>
+    <File Path="..\UnitTesting\Attributes\Attributes.Range.pas"/>
+    <File Path="..\UnitTesting\DataProviders"/>
+    <File Path="..\UnitTesting\DataProviders\DataProvider.EcefToLla.pas"/>
+    <File Path="..\Parser\Parser.Simbad.pas"/>
+    <File Path="TestEcef.pas"/>
+    <File Path="TestRightAscensionDeclenation.pas"/>
+    <File Path="SimbadDataTest.pas"/>
+  </ProjectSortOrder>
+</BorlandProject>
