@@ -1,0 +1,26 @@
+[
+  {
+	  "Lla": {
+		  "LatitudeDegrees": 34.0522, 
+		  "LongitudeDegrees": -118.2437, 
+		  "AltitudeMeters": 100.00000000031852
+	  },
+	  "Ecef": {
+		  "XMeters": -2503396.5198597223,
+		  "YMeters": -4660276.422746513,
+		  "ZMeters": 3551301.3540872796
+	  }
+  },
+  {
+	  "Lla": {
+		  "LatitudeDegrees": 42.051, 
+		  "LongitudeDegrees": -105.24, 
+		  "AltitudeMeters": 1526.999999999722
+	  },
+	  "Ecef": {
+		  "XMeters": -1247110.7388627927,
+		  "YMeters": -4577497.307185983,
+		  "ZMeters": 4250834.659784284
+	  }
+  }
+]
