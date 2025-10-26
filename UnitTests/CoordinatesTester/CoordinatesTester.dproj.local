@@ -16,6 +16,9 @@
     <Transaction>2025/10/07 20:51:40.000.107,C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas=C:\Development\UnitTests-Ekon29\Parser\Parser.Simbad.pas</Transaction>
     <Transaction>2025/10/07 20:59:20.000.697,=C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas</Transaction>
     <Transaction>2025/10/07 20:59:37.000.891,C:\Development\UnitTests-Ekon29\CoordinatesTester\Unit1.pas=C:\Development\UnitTests-Ekon29\CoordinatesTester\SimbadDataTest.pas</Transaction>
+    <Transaction>2025/10/25 12:39:04.000.914,C:\Development\Ekon29\UnitTests\CoordinatesTester\SimbadDataTest.pas=</Transaction>
+    <Transaction>2025/10/26 10:46:28.000.439,=C:\Development\Ekon29\UnitTests\CoordinatesTester\Unit1.pas</Transaction>
+    <Transaction>2025/10/26 10:46:58.000.301,C:\Development\Ekon29\UnitTests\CoordinatesTester\Unit1.pas=C:\Development\Ekon29\UnitTests\UnitTesting\Logger\Debug.Logger.pas</Transaction>
   </Transactions>
 	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="..\..\UnitTests"/>
@@ -27,9 +30,8 @@
     <File Path="..\UnitTesting\Attributes\Attributes.Range.pas"/>
     <File Path="..\UnitTesting\DataProviders"/>
     <File Path="..\UnitTesting\DataProviders\DataProvider.EcefToLla.pas"/>
-    <File Path="..\Parser\Parser.Simbad.pas"/>
+    <File Path="..\UnitTesting\Logger"/>
+    <File Path="..\UnitTesting\Logger\Debug.Logger.pas"/>
     <File Path="TestEcef.pas"/>
-    <File Path="TestRightAscensionDeclenation.pas"/>
-    <File Path="SimbadDataTest.pas"/>
   </ProjectSortOrder>
 </BorlandProject>

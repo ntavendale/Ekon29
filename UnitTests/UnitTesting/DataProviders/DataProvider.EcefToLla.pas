@@ -61,8 +61,8 @@ begin
   // Convert the TGUID to a string
   FGUIDString := GUIDToString(LGUID);
   FStates := TList<TSampleState>.Create;
-
-  InitStates;
+  InitFromFile('C:\Development\Ekon29\JsonData\TSampleState.json');
+  //InitStates;
 end;
 
 destructor TEcefToLlaDataProvider.Destroy;

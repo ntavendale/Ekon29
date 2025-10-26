@@ -18,7 +18,7 @@ uses
   Coordinates in '..\Coordinates\Coordinates.pas',
   Attributes.Range in '..\UnitTesting\Attributes\Attributes.Range.pas',
   DataProvider.EcefToLla in '..\UnitTesting\DataProviders\DataProvider.EcefToLla.pas',
-  SimbadDataTest in 'SimbadDataTest.pas';
+  Debug.Logger in '..\UnitTesting\Logger\Debug.Logger.pas';
 
 { keep comment here to protect the following conditional from being removed by the IDE when adding a unit }
 {$IFNDEF TESTINSIGHT}
@@ -27,6 +27,7 @@ var
   results: IRunResults;
   logger: ITestLogger;
   nunitLogger : ITestLogger;
+  debugLogger : ITestLogger;
 {$ENDIF}
 begin
 {$IFDEF TESTINSIGHT}
@@ -49,9 +50,13 @@ begin
       logger := TDUnitXConsoleLogger.Create(TDUnitX.Options.ConsoleMode = TDunitXConsoleMode.Quiet);
       runner.AddLogger(logger);
     end;
+
     //Generate an NUnit compatible XML File
     nunitLogger := TDUnitXXMLNUnitFileLogger.Create(TDUnitX.Options.XMLOutputFile);
     runner.AddLogger(nunitLogger);
+
+    debugLogger := TDebugLogger.Create;
+    runner.AddLogger(debugLogger);
 
     // Don't exit automatically
     TDUnitX.Options.ExitBehavior := TDUnitXExitBehavior.Pause;
