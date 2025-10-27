@@ -21,10 +21,8 @@ use ieee.std_logic_unsigned.all;
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+-- Uses VHDL2008. Need to set this in file properties as part of project 
+-- since no mechanisim to do so directly in a vhd file.
 
 entity Seven_Segment_Display_Binary is
   generic (CYCLES_PER_ANODE : natural := 100000); -- Default 1 ms (1 kHz refresh rate)

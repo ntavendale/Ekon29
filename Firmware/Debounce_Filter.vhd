@@ -17,10 +17,8 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
+-- Uses VHDL2008. Need to set this in file properties as part of project 
+-- since no mechanisim to do so directly in a vhd file.
 
 entity Debounce_Filter is
   -- DEBOUNCE_LIMIT is like a parameter with a default of 1,000,000

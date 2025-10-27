@@ -16,7 +16,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Use at least VHDL 2008 when building.
+-- Uses VHDL2008. Need to set this in file properties as part of project 
+-- since no mechanisim to do so directly in a vhd file.
 
 entity UART_Loopback_Top is
   generic (
@@ -55,7 +56,7 @@ begin
       o_Debounced    => w_Center_Button);
       
   -- UART_RX.vhd
-  ART_RX_Inst : entity work.UART_RX
+  UART_RX_Inst : entity work.UART_RX
     generic map (CLKS_PER_BIT => BASYS3_CLKS_PER_BIT)
     port map (
       i_Rx_Clk    => clk,

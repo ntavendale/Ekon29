@@ -12,6 +12,9 @@
 -- Example: 100 MHz Clock, 115200 baud UART
 -- (100000000)/(115200) = 868
 
+-- Uses VHDL2008. Need to set this in file properties as part of project 
+-- since no mechanisim to do so directly in a vhd file.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
