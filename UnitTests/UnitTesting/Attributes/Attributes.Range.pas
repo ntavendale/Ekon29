@@ -129,8 +129,10 @@ begin
         var i := Length(FTestCaseInfo);
         SetLength(FTestCaseInfo, i + 1);
         FTestCaseInfo[i].Name := FCaseName;
-        SetLength(FTestCaseInfo[i].Values, 1);
-        FTestCaseInfo[i].Values[0] := TValue.From<TEcefTestData>(TEcefTestData.Create(LNextX, LNextY, LNextZ));;
+        SetLength(FTestCaseInfo[i].Values, 3);
+        FTestCaseInfo[i].Values[0] := LNextX;
+        FTestCaseInfo[i].Values[1] := LNextY;
+        FTestCaseInfo[i].Values[2] := LNextZ;
         LNextZ := LNextZ + FRangeZ.Step;
       end;
       LNextY := LNextY + FRangeY.Step;

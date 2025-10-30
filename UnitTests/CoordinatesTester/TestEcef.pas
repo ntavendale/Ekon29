@@ -51,9 +51,9 @@ begin
   var Geodetic := Expected.ToGeodeticCoordinates;
   var Actual := Geodetic.ToEcefCoordinates;
 
-  Assert.AreEqual(Expected.XMeters, Actual.XMeters, 1000, 'X Meters wrong!');
-  Assert.AreEqual(Expected.YMeters, Actual.YMeters, 1000, 'Y Meters wrong!');
-  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, 1000, 'Z Meters wrong!');
+  Assert.AreEqual(Expected.XMeters, Actual.XMeters, 10, 'X Meters wrong!');
+  Assert.AreEqual(Expected.YMeters, Actual.YMeters, 10, 'Y Meters wrong!');
+  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, 10, 'Z Meters wrong!');
 end;
 
 procedure TTestEcef.TestRange(X, Y, Z: Double);
@@ -64,9 +64,9 @@ begin
   var Geodetic := Expected.ToGeodeticCoordinates;
   var Actual := Geodetic.ToEcefCoordinates;
 
-  Assert.AreEqual(Expected.XMeters, Actual.XMeters, TOLERANCE, 'X Meters wrong!');
-  Assert.AreEqual(Expected.YMeters, Actual.YMeters, TOLERANCE, 'Y Meters wrong!');
-  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, TOLERANCE, 'Z Meters wrong!');
+  Assert.AreEqual(Expected.XMeters, Actual.XMeters, 100, 'X Meters wrong!');
+  Assert.AreEqual(Expected.YMeters, Actual.YMeters, 100, 'Y Meters wrong!');
+  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, 100, 'Z Meters wrong!');
 end;
 
 procedure TTestEcef.ToLla(AEcef: TEcefCoordinates; AExpected: TGeodeticCoordinates; ATolerance: Double; AObjectID: String);

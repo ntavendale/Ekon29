@@ -111,7 +111,8 @@ begin
   Result.SetRow(2,[-cos(ALatitudeRadians)*cos(ALongitudeRadians), -cos(ALatitudeRadians)*sin(ALongitudeRadians), -sin(ALatitudeRadians)]);
 end;
 
-// Use Ferrari-based algorithm described by Zhu and Heikkinen. Closed form and more precise.
+// Use Ferrari-based algorithm described by Zhu and Heikkinen.
+// Closed form and more precise.
 function TEcefCoordinatesHelper.ToGeodeticCoordinates: TGeodeticCoordinates;
 var
   f, g, c, s, p, q, r0, u, v, z0: Double;
