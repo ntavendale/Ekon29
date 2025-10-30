@@ -17,13 +17,15 @@ type
     procedure Setup;
     [TearDown]
     procedure TearDown;
-    // Sample Methods
-    // Simple single Test
     [Test]
-    [Category('RangeTests')]  // --exclude:RangeTests --include:RangeTests
-    [TestCaseRange('RangeTest', '100.0:200.0:10.0, 100.0:200.0:10.0, 100.0:200.0:10.0')]
-    procedure TestRange(ATestData: TEcefTestData);
-    // Test with TestCase Attribute to supply parameters.
+    [TestCase('TestAEcef','-1247110.7388627927, -4577497.307185983, 4250834.659784284')]
+    [TestCase('TestBEcef','20100.0, 20100.0, 20100.0')]
+    procedure TestPoint(XMeters, YMeters, ZMeters: Double);
+    [Test]
+    // include will only bring these in if explicitly mentions=ed on ciommand line.
+    [Category('RangeTests')]  //
+    [TestCaseRange('RangeTest', '20100.0:20200.0:10.0, 20100.0:20200.0:10.0, 20100.0:20200.0:10.0')]
+    procedure TestRange(X, Y, Z: Double);
     [Test]
     [TestCaseProvider(TEcefToLlaDataProvider)]
     procedure ToLla(AEcef: TEcefCoordinates; AExpected: TGeodeticCoordinates; ATolerance: Double; AObjectID: String);
@@ -42,9 +44,29 @@ procedure TTestEcef.TearDown;
 begin
 end;
 
-procedure TTestEcef.TestRange(ATestData: TEcefTestData);
+procedure TTestEcef.TestPoint(XMeters, YMeters, ZMeters: Double);
 begin
-  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('X: %.3f, Y: %.3f, Z: %.3f', [ATestData.XMeters, ATestData.YMeters, ATestData.ZMeters]));
+  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('Running Test X: %.3f, Y: %.3f, Z: %.3f', [XMeters, YMeters, ZMeters]));
+  var Expected := TEcefCoordinates.Create(XMeters, YMeters, ZMeters);
+  var Geodetic := Expected.ToGeodeticCoordinates;
+  var Actual := Geodetic.ToEcefCoordinates;
+
+  Assert.AreEqual(Expected.XMeters, Actual.XMeters, 1000, 'X Meters wrong!');
+  Assert.AreEqual(Expected.YMeters, Actual.YMeters, 1000, 'Y Meters wrong!');
+  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, 1000, 'Z Meters wrong!');
+end;
+
+procedure TTestEcef.TestRange(X, Y, Z: Double);
+begin
+  TDUnitX.CurrentRunner.Log(TLogLevel.Information,  String.Format('X: %.3f, Y: %.3f, Z: %.3f', [X, Y, Z]));
+
+  var Expected := TEcefCoordinates.Create(X, Y, Z);
+  var Geodetic := Expected.ToGeodeticCoordinates;
+  var Actual := Geodetic.ToEcefCoordinates;
+
+  Assert.AreEqual(Expected.XMeters, Actual.XMeters, TOLERANCE, 'X Meters wrong!');
+  Assert.AreEqual(Expected.YMeters, Actual.YMeters, TOLERANCE, 'Y Meters wrong!');
+  Assert.AreEqual(Expected.ZMeters, Actual.ZMeters, TOLERANCE, 'Z Meters wrong!');
 end;
 
 procedure TTestEcef.ToLla(AEcef: TEcefCoordinates; AExpected: TGeodeticCoordinates; ATolerance: Double; AObjectID: String);

@@ -36,15 +36,29 @@ function GetGlobalHourAngle(ADataTime: TDateTime; ATimeIsUTC: Boolean = FALSE): 
 implementation
 
 const
-  EARTH_EQUATORIAL_RADIUS_METERS = 6378137.0;
-  EARTH_POLAR_RADIUS_METERS = 6356752.3142;
-  EARTH_ECCENTRICITY_SQUARED = 6.69437999014E-3;
-  SECOND_ECCENTRICITY_SQUARED = 6.69437999014E-3;
-  METERS_PER_FOOT = 0.3048; // US International Foot (US Survey Fooot should now be obsolete).
-  FEET_PER_MILE = 5280;
-  METERS_PER_NAUTICAL_MILE = 1852;
-  SECONDS_PER_HOUR = 3600;
+  EARTH_EQUATORIAL_RADIUS_METERS: Double = 6378137.0;
+  EARTH_POLAR_RADIUS_METERS: Double = 6356752.3142;
+  EARTH_ECCENTRICITY_SQUARED: Double = 6.69437999014E-3;
+  SECOND_ECCENTRICITY_SQUARED: Double = 6.73949674228E-3;
+  METERS_PER_FOOT: Double = 0.3048; // US International Foot (US Survey Fooot should now be obsolete).
+  FEET_PER_MILE: Double = 5280;
+  METERS_PER_NAUTICAL_MILE: Double = 1852;
+  SECONDS_PER_HOUR: Double = 3600;
   RA_DEGREES_PER_HOUR: DOUBLE = 15.0;
+
+
+// In Delphi, the standard Power function (from the Math unit) does not produce
+// a real-valued result for a negative base raised to a fractional exponent,
+// because it is designed to find the principal root in the complex number domain.
+// To find the real-valued cube root of a negative number, we must account for
+// the negative sign manually.
+function RealCubeRoot(X: Extended): Extended;
+begin
+  if X >= 0 then
+    Result := Power(X, 1.0 / 3.0)
+  else
+    Result := -Power(Abs(X), 1.0 / 3.0);
+end;
 
 function MetersPerSecondToFeetPerSecond(AMetersPerSecond: Double): Double;
 begin
@@ -109,7 +123,10 @@ begin
        (1 - EARTH_ECCENTRICITY_SQUARED) * Self.ZMeters * Self.ZMeters -
        EARTH_ECCENTRICITY_SQUARED * (EARTH_EQUATORIAL_RADIUS_METERS*EARTH_EQUATORIAL_RADIUS_METERS - EARTH_POLAR_RADIUS_METERS*EARTH_POLAR_RADIUS_METERS);
   c := EARTH_ECCENTRICITY_SQUARED * EARTH_ECCENTRICITY_SQUARED * f * LEquatorialHypotenuse*LEquatorialHypotenuse / (g*g*g);
-  s := Power((1 + c + Sqrt(c*(c+2))), 1.0/3.0);
+
+  var int1: Double := Sqrt(c*(c+2));
+  var int2: Double := (1 + c + int1);
+  s := RealCubeRoot(int2);
   p := f / (3 * Power((s + 1/s + 1), 2) * g*g);
   q := Sqrt(1 + 2 * EARTH_ECCENTRICITY_SQUARED * EARTH_ECCENTRICITY_SQUARED * p);
 

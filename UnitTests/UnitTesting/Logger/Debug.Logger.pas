@@ -7,7 +7,10 @@ uses
 
 type
   ///
-  ///  Writes nicely formatted and colored messages to the console window.
+  ///  Writes messages to OutputDebugString to be seen in DebugView.
+  ///  Must be run outside of a debugger to work.
+  ///  Can implement an ITestLogger to write to other outputs - Syslog, ElasticSearch,
+  ///  Databases, etc.
   ///
   TDebugLogger = class(TInterfacedObject, ITestLogger)
   private
@@ -186,7 +189,8 @@ end;
 
 procedure TDebugLogger.OnTestIgnored(const threadId: TThreadID; const AIgnored: ITestResult);
 begin
-  //
+  var LOut := String.Format('%s 0x%.8x Ignoring test: %s.', [FormatDateTime('YYYY-MM-DD hh:nn:ss.zzz', Now), threadId, AIgnored.Test.Name]);
+  OutputDebugString(PChar(LOut));
 end;
 
 procedure TDebugLogger.OnTestMemoryLeak(const threadId: TThreadID; const Test: ITestResult);

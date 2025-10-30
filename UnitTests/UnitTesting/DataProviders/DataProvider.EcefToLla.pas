@@ -22,8 +22,10 @@ type
   private
     FGUIDString: String;
     FStates: TList<TSampleState>;
-    procedure InitFromFile(AFileNme: String);
+    FFileStates: TList<TSampleState>;
+    //procedure InitFromFile(AFileNme: String);
     procedure InitStates;
+    procedure InitFromFile(AFileNme: String);
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -61,13 +63,16 @@ begin
   // Convert the TGUID to a string
   FGUIDString := GUIDToString(LGUID);
   FStates := TList<TSampleState>.Create;
+  FFileStates := TList<TSampleState>.Create;
+  InitStates;
   InitFromFile('C:\Development\Ekon29\JsonData\TSampleState.json');
-  //InitStates;
 end;
 
 destructor TEcefToLlaDataProvider.Destroy;
 begin
   FStates.Free;
+  FFileStates.Free;
+  inherited Destroy;
 end;
 
 procedure TEcefToLlaDataProvider.InitFromFile(AFileNme: String);
@@ -78,7 +83,7 @@ begin
   begin
     try
       for var LObject in LArray do
-        FStates.Add(TSampleState.FromJsonObject(LObject as TJsonObject));
+        FFileStates.Add(TSampleState.FromJsonObject(LObject as TJsonObject));
     finally
       LArray.Free;
     end;
@@ -99,7 +104,10 @@ end;
 
 function TEcefToLlaDataProvider.GetCaseCount(const MethodName: string): Integer;
 begin
-  Result := FStates.Count;
+  if (MethodName = 'ToLla') then
+    Result := FStates.Count
+  else if (MethodName = 'ToEcef') then
+    Result := FFileStates.Count;
 end;
 
 function TEcefToLlaDataProvider.GetCaseName(const MethodName: String; const CaseNumber : Integer): String;
@@ -114,7 +122,7 @@ function TEcefToLlaDataProvider.GetCaseParams(const MethodName: string; const Ca
 begin
   var LTemp: Integer := 0;
   SetLength(Result, 0);
-  if (CaseNumber >=0) and (CaseNumber < FStates.Count) then
+  if (CaseNumber >=0) and (CaseNumber < FStates.Count) and (MethodName = 'ToLla') then
   begin
     if (MethodName = 'ToLla') then
     begin
@@ -123,12 +131,15 @@ begin
       Result[1] := TValue.From<TGeodeticCoordinates>(FStates[CaseNumber].Lla);
       Result[2] := TOLERANCE;
       Result[3] := FGUIDString;
-    end
-    else if (MethodName = 'ToEcef') then
+    end;
+  end;
+  if (CaseNumber >=0) and (CaseNumber < FFileStates.Count) and (MethodName = 'ToEcef') then
+  begin
+    if (MethodName = 'ToEcef') then
     begin
       SetLength(Result, 5);
-      Result[0] := TValue.From<TGeodeticCoordinates>(FStates[CaseNumber].Lla);
-      Result[1] := TValue.From<TEcefCoordinates>(FStates[CaseNumber].Ecef);
+      Result[0] := TValue.From<TGeodeticCoordinates>(FFileStates[CaseNumber].Lla);
+      Result[1] := TValue.From<TEcefCoordinates>(FFileStates[CaseNumber].Ecef);
       Result[2] := TOLERANCE;
       Result[3] := FGUIDString;
     end;
